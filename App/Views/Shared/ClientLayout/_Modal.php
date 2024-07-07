@@ -1,16 +1,20 @@
-<div class="modal fade right-modal" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade right-modal" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header p-0">
                 <nav class="schedule w-100">
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-link active col-5 py-4" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
+                        <a class="nav-link active col-5 py-4" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                            role="tab" aria-controls="nav-home" aria-selected="true">
                             <p class="mb-0 font-weight-bold">Đăng nhập</p>
                         </a>
-                        <a class="nav-link col-5 py-4" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">
+                        <a class="nav-link col-5 py-4" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
+                            role="tab" aria-controls="nav-profile" aria-selected="false">
                             <p class="mb-0 font-weight-bold">Đăng kí</p>
                         </a>
-                        <a class="nav-link col-2 p-0 d-flex align-items-center justify-content-center" data-dismiss="modal" aria-label="Close">
+                        <a class="nav-link col-2 p-0 d-flex align-items-center justify-content-center"
+                            data-dismiss="modal" aria-label="Close">
                             <h1 class="m-0 h4 text-dark">
                                 <i class="icofont-close-line"></i>
                             </h1>
@@ -28,7 +32,8 @@
                                 <form id="formLogin">
                                     <div class="form-group">
                                         <label>Tên tài khoản hoặc Email</label>
-                                        <input placeholder="Enter Username or Email" type="text" class="form-control" id="UsernameLogin" />
+                                        <input placeholder="Enter Username or Email" type="text" class="form-control"
+                                            id="UsernameLogin" />
                                     </div>
                                     <div class="form-group">
                                         <label for="password">Mật khẩu
@@ -36,9 +41,11 @@
                                                 khẩu?</a>
 
                                         </label>
-                                        <input placeholder="Nhập mật khẩu" type="password" class="form-control" id="PasswordLogin" />
+                                        <input placeholder="Nhập mật khẩu" type="password" class="form-control"
+                                            id="PasswordLogin" />
                                     </div>
-                                    <button type="button" onclick="login()" class="btn btn-success btn-lg rounded btn-block">
+                                    <button type="button" onclick="login()"
+                                        class="btn btn-success btn-lg rounded btn-block">
                                         Đăng nhập
                                     </button>
                                 </form>
@@ -72,7 +79,9 @@
                                                 <li>Chỉ nhập chữ và số viết thường</li>
                                             </ul>
                                         </small>
-                                        <input type="text" class="form-control" id="Username" placeholder="Enter username" name="Username" pattern="[a-z0-9]+" title="Chỉ nhập chữ và số">
+                                        <input type="text" class="form-control" id="Username"
+                                            placeholder="Enter username" name="Username" pattern="[a-z0-9]+"
+                                            title="Chỉ nhập chữ và số">
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label> <br>
@@ -91,15 +100,18 @@
                                                 <li>Ít nhất 1 số</li>
                                             </ul>
                                         </small>
-                                        <input placeholder="Enter Password" type="password" class="form-control" id="Password" />
+                                        <input placeholder="Enter Password" type="password" class="form-control"
+                                            id="Password" />
                                     </div>
                                     <div class="form-group">
                                         <label for="ConfirmPassword">Confirm Password</label>
-                                        <input placeholder="Enter Confirmation Password" type="password" class="form-control" id="ConfirmPassword" />
+                                        <input placeholder="Enter Confirmation Password" type="password"
+                                            class="form-control" id="ConfirmPassword" />
                                     </div>
                                     <div class="g-recaptcha" data-sitekey="<?= $googleKey ?>">
                                     </div>
-                                    <button type="button" onclick="register1()" class="btn btn-success rounded btn-lg btn-block">
+                                    <button type="button" onclick="register1()"
+                                        class="btn btn-success rounded btn-lg btn-block">
                                         Tạo tài khoản
                                     </button>
                                 </form>
@@ -123,74 +135,74 @@
     </div>
 </div>
 <script>
-    function register1() {
-        var username = $("#Username").val();
-        var password = $("#Password").val();
-        var confirmPassword = $("#ConfirmPassword").val();
-        var email = $("#Email").val();
+function register1() {
+    var username = $("#Username").val();
+    var password = $("#Password").val();
+    var confirmPassword = $("#ConfirmPassword").val();
+    var email = $("#Email").val();
 
-        // Client-side validation
-        if (username === '' || password === '' || confirmPassword === '' || email === '') {
-            Swal.fire("Vui lòng nhập đầy đủ thông tin!", "", "warning");
-            return;
-        }
-        var usernameRegex = /^[a-z0-9]+$/;
-        if (!usernameRegex.test(username)) {
-            Swal.fire("Tên tài khoản không hợp lệ!", "Chỉ được sử dụng chữ cái viết thường và chữ số viết liền không dấu.",
-                "warning");
-
-            return;
-        }
-        // Validate password strength
-        var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\w!@#$%^&*()\-_=+{};:,<.>.]{8,}$/;
-
-        if (!passwordRegex.test(password)) {
-            Swal.fire("Mật khẩu không đủ mạnh!", "Vui lòng tuân thủ yêu cầu về mật khẩu.", "warning");
-            return;
-        }
-
-        if (password !== confirmPassword) {
-            Swal.fire("Mật khẩu nhập lại không khớp!", "", "error");
-            return;
-        }
-
-        // Submit form using AJAX
-        const data = {
-            Username: username,
-            Password: password,
-            ConfirmPassword: confirmPassword,
-            Email: email,
-        };
-
-        $.ajax({
-            url: "/auth/register",
-            method: "POST",
-            data: data,
-            beforeSend: function() {
-                Swal.fire({
-                    title: "Vui lòng chờ...",
-                    onBeforeOpen: () => {
-                        Swal.showLoading();
-                    },
-                    onAfterClose: () => {},
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                    allowEnterKey: false,
-                });
-            },
-            success: function(res) {
-                if (res.success) {
-                    Swal.fire("Đăng ký thành công!", res.message, "success").then(() => {
-                        window.location.href = "/auth/verify/" + username;
-                    });
-                } else {
-                    Swal.fire("Đăng ký thất bại!", "Gmail đã được sử dụng!", "error");
-                }
-            },
-            error: function(err) {
-                console.log(err);
-                Swal.fire("Đăng ký thất bại!", "Đã xảy ra lỗi, vui lòng thử lại sau.", "error");
-            },
-        });
+    // Client-side validation
+    if (username === '' || password === '' || confirmPassword === '' || email === '') {
+        Swal.fire("Vui lòng nhập đầy đủ thông tin!", "", "warning");
+        return;
     }
+    var usernameRegex = /^[a-z0-9]+$/;
+    if (!usernameRegex.test(username)) {
+        Swal.fire("Tên tài khoản không hợp lệ!", "Chỉ được sử dụng chữ cái viết thường và chữ số viết liền không dấu.",
+            "warning");
+
+        return;
+    }
+    // Validate password strength
+    var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\w!@#$%^&*()\-_=+{};:,<.>.]{8,}$/;
+
+    if (!passwordRegex.test(password)) {
+        Swal.fire("Mật khẩu không đủ mạnh!", "Vui lòng tuân thủ yêu cầu về mật khẩu.", "warning");
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        Swal.fire("Mật khẩu nhập lại không khớp!", "", "error");
+        return;
+    }
+
+    // Submit form using AJAX
+    const data = {
+        Username: username,
+        Password: password,
+        ConfirmPassword: confirmPassword,
+        Email: email,
+    };
+
+    $.ajax({
+        url: "/auth/register",
+        method: "POST",
+        data: data,
+        beforeSend: function() {
+            Swal.fire({
+                title: "Vui lòng chờ...",
+                onBeforeOpen: () => {
+                    Swal.showLoading();
+                },
+                onAfterClose: () => {},
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+            });
+        },
+        success: function(res) {
+            if (res.success) {
+                Swal.fire("Đăng ký thành công!", res.message, "success").then(() => {
+                    window.location.href = "/auth/verify/" + username;
+                });
+            } else {
+                Swal.fire("Đăng ký thất bại!", res.message || "Email đã được sử dụng", "error");
+            }
+        },
+        error: function(err) {
+            console.log(err);
+            Swal.fire("Đăng ký thất bại!", "Đã xảy ra lỗi, vui lòng thử lại sau.", "error");
+        },
+    });
+}
 </script>
