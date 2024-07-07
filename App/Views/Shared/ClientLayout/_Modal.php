@@ -136,11 +136,14 @@
         }
         var usernameRegex = /^[a-z0-9]+$/;
         if (!usernameRegex.test(username)) {
-            Swal.fire("Tên tài khoản không hợp lệ!", "Chỉ được sử dụng chữ cái viết thường và số.", "warning");
+            Swal.fire("Tên tài khoản không hợp lệ!", "Chỉ được sử dụng chữ cái viết thường và chữ số viết liền không dấu.",
+                "warning");
+
             return;
         }
         // Validate password strength
-        var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+        var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[\w!@#$%^&*()\-_=+{};:,<.>.]{8,}$/;
+
         if (!passwordRegex.test(password)) {
             Swal.fire("Mật khẩu không đủ mạnh!", "Vui lòng tuân thủ yêu cầu về mật khẩu.", "warning");
             return;
@@ -181,7 +184,7 @@
                         window.location.href = "/auth/verify/" + username;
                     });
                 } else {
-                    Swal.fire("Đăng ký thất bại!", res.message, "error");
+                    Swal.fire("Đăng ký thất bại!", "Gmail đã được sử dụng!", "error");
                 }
             },
             error: function(err) {

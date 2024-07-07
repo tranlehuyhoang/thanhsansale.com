@@ -71,7 +71,7 @@ class AuthController extends Controller
             // Các kiểm tra xác thực và kiểm tra sự tồn tại của người dùng hiện tại...
 
             $rules = [
-                'Username' => 'required|min:3|max:100|unique:users,Username|regex:/^[a-zA-Z0-9]+$/',
+                'Username' => 'required|min:3|max:100|regex:/^[a-zA-Z0-9]+$/',
                 'Email' => 'required|email',
                 'Password' => 'required|min:8|max:100|password_strength'
             ];
@@ -79,7 +79,7 @@ class AuthController extends Controller
                 'Username.required' => 'Tên người dùng là bắt buộc',
                 'Username.min' => 'Tên người dùng phải có ít nhất 3 ký tự',
                 'Username.max' => 'Tên người dùng không được vượt quá 100 ký tự',
-                'Username.unique' => 'Tên người dùng đã tồn tại',
+                
                 'Username.regex' => 'Tên người dùng chỉ được chứa các chữ cái và số, không có ký tự đặc biệt hoặc khoảng trắng',
                 'Email.required' => 'Email là bắt buộc',
                 'Email.email' => 'Email không hợp lệ',
@@ -125,9 +125,16 @@ class AuthController extends Controller
                 return;
             }
 
+            // Kiểm tra nếu username đã tồn tại và đã được xác thực qua email
+            $existingUsername = $this->userService->GetByUsername($user['Username']);
+            if ($existingUsername && $existingUsername->IsActive == 1) {
+                Response::badRequest([], 'Tên người dùng đã tồn tại');
+                return;
+            }
+
             $userSave = [
                 'Username' => $user['Username'],
-                'Password' => $user['Password'],
+                'Password' => password_hash($user['Password'], PASSWORD_DEFAULT),
                 'Email' => $user['Email'],
                 'Role' => ERole::Member,
                 'IsActive' => 0,
@@ -147,6 +154,7 @@ class AuthController extends Controller
 
         $this->render('Auth.Register', '_AuthenLayout', ['title' => 'Đăng kí tài khoản mới']);
     }
+
 
 
 
