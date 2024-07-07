@@ -79,7 +79,7 @@ class AuthController extends Controller
                 'Username.required' => 'Tên người dùng là bắt buộc',
                 'Username.min' => 'Tên người dùng phải có ít nhất 3 ký tự',
                 'Username.max' => 'Tên người dùng không được vượt quá 100 ký tự',
-                
+
                 'Username.regex' => 'Tên người dùng chỉ được chứa các chữ cái và số, không có ký tự đặc biệt hoặc khoảng trắng',
                 'Email.required' => 'Email là bắt buộc',
                 'Email.email' => 'Email không hợp lệ',
@@ -111,6 +111,7 @@ class AuthController extends Controller
                     'IsActive' => 0,
                 ];
 
+
                 $result = $this->userService->Update($data, $existingUser->Id, $this->userService->tableName);
 
                 if (!$result) {
@@ -134,7 +135,7 @@ class AuthController extends Controller
 
             $userSave = [
                 'Username' => $user['Username'],
-                'Password' => password_hash($user['Password'], PASSWORD_DEFAULT),
+                'Password' => $user['Password'],
                 'Email' => $user['Email'],
                 'Role' => ERole::Member,
                 'IsActive' => 0,
