@@ -1,0 +1,231 @@
+[
+  {
+    "code": "201",
+    "name": "VIETINBANK Ngân hàng Công Thương Việt Nam (VIETINBANK)",
+    "nameTCB": "CONG THUONG VN (VIETINBANK)",
+    "nameVPBank": "VIETINBANK",
+    "logo": "https://api.vietqr.io/img/ICB.png"
+  },
+  {
+    "code": "202",
+    "name": "BIDV Ngân hàng Đầu tư và phát triển Việt Nam (BIDV)",
+    "nameTCB": "DAU TU VA PHAT TRIEN VN (BIDV)",
+    "nameVPBank": "BIDV",
+    "logo": "https://api.vietqr.io/img/BIDV.png"
+  },
+  {
+    "code": "203",
+    "name": "VIETCOMBANK Ngân hàng Ngoại Thương Việt Nam (Vietcombank)",
+    "nameTCB": "NGOAI THUONG VN (VCB)",
+    "nameVPBank": "VIETCOMBANK",
+    "logo": "https://api.vietqr.io/img/VCB.png"
+  },
+  {
+    "code": "204",
+    "name": "AGRIBANK Ngân hàng Nông Nghiệp và phát triển nông thôn Việt Nam (AGRIBANK)",
+    "nameTCB": "NONG NGHIEP VA PTNT VN (AGRIBANK)",
+    "nameVPBank": "AGRIBANK",
+    "logo": "https://api.vietqr.io/img/VBA.png"
+  },
+  {
+    "code": "302",
+    "name": "MSB Ngân hàng Hàng Hải (MSB)",
+    "nameTCB": "HANG HAI (MARITIMEBANK-MSB)",
+    "nameVPBank": "MSB",
+    "logo": "https://api.vietqr.io/img/MSB.png"
+  },
+  {
+    "code": "303",
+    "name": "SACOMBANK Ngân hàng Sài Gòn Thương tín (SACOMBANK)",
+    "nameTCB": "SAI GON THUONG TIN (SACOMBANK)",
+    "nameVPBank": "SACOMBANK",
+    "logo": "https://api.vietqr.io/img/STB.png"
+  },
+  {
+    "code": "304",
+    "name": "DONG A BANK Ngân hàng Đống Á (DONG A BANK)",
+    "nameTCB": "DONG A (DAB)",
+    "nameVPBank": "DAB",
+    "logo": "https://api.vietqr.io/img/SEAB.png"
+  },
+  {
+    "code": "305",
+    "name": "EXIMBANK Ngân hàng Xuất Nhập khẩu (EXIMBANK)",
+    "nameTCB": "XUAT NHAP KHAU (EXIMBANK)",
+    "nameVPBank": "EIB",
+    "logo": "https://api.vietqr.io/img/EIB.png"
+  },
+  {
+    "code": "306",
+    "name": "NAM A BANK Ngân hàng Nam Á (NAM A BANK)",
+    "nameTCB": "NAM A",
+    "nameVPBank": "NAM A BANK",
+    "logo": "https://inkythuatso.com/uploads/thumbnails/800/2021/12/nam-a-bank-logo-21-10-30-58.jpg"
+  },
+  {
+    "code": "307",
+    "name": "ACB Ngân hàng Á Châu (ACB)",
+    "nameTCB": "A CHAU (ACB)",
+    "nameVPBank": "ACB",
+    "logo": "https://api.vietqr.io/img/ACB.png"
+  },
+  {
+    "code": "308",
+    "name": "SAIGONBANK Ngân hàng Sài Gòn Công Thương (SAIGONBANK)",
+    "nameTCB": "SAI GON CONG THUONG",
+    "nameVPBank": "SAIGONBANK",
+    "logo": "https://api.vietqr.io/img/SCB.png"
+  },
+  {
+    "code": "309",
+    "name": "VPBANK Ngân hàng Việt Nam Thịnh Vượng (VPBANK)",
+    "nameTCB": "VIET NAM THINH VUONG (VPBANK)",
+    "nameVPBank": "VPBANK",
+    "logo": "https://api.vietqr.io/img/VPB.png"
+  },
+  {
+    "code": "311",
+    "name": "MB Ngân hàng Quân Đội (MB)",
+    "nameTCB": "QUAN DOI (MB)",
+    "nameVPBank": "MB",
+    "logo": "https://api.vietqr.io/img/MB.png"
+  },
+  {
+    "code": "313",
+    "name": "BAC A BANK Ngân hàng Bắc Á (BAC A BANK)",
+    "nameTCB": "BAC A (NASB)",
+    "nameVPBank": "BAB",
+    "logo": "https://api.vietqr.io/img/BAB.png"
+  },
+  {
+    "code": "314",
+    "name": "VIB Ngân hàng Quốc tế (VIB)",
+    "nameTCB": "QUOC TE (VIB)",
+    "nameVPBank": "VIB",
+    "logo": "https://api.vietqr.io/img/VIB.png"
+  },
+  {
+    "code": "317",
+    "name": "SEABANK Ngân hàng Đông Nam Á (SEABANK)",
+    "nameTCB": "DONG NAM A (SEA BANK)",
+    "nameVPBank": "SEAB",
+    "logo": "https://api.vietqr.io/img/SEAB.png"
+  },
+  {
+    "code": "320",
+    "name": "GPBANK Ngân hàng Dầu khí toàn cầu (GPBANK)",
+    "nameTCB": "DAU KHI TOAN CAU (GPBANK)",
+    "nameVPBank": "GPBANK"
+  },
+  {
+    "code": "321",
+    "name": "HD BANK Ngân hàng Phát triển TP.HCM (HD BANK)",
+    "nameTCB": "PHAT TRIEN TP HCM (HDBANK)",
+    "nameVPBank": "HDBANK",
+    "logo": "https://api.vietqr.io/img/HDB.png"
+  },
+  {
+    "code": "323",
+    "name": "ABBANK Ngân hàng An Bình (ABBANK)",
+    "nameTCB": "AN BINH (AB BANK)",
+    "nameVPBank": "ABBANK",
+    "logo": "https://api.vietqr.io/img/ABB.png"
+  },
+  {
+    "code": "333",
+    "name": "OCB Ngân hàng Phương Đông (OCB)",
+    "nameTCB": "PHUONG DONG (OCB)",
+    "nameVPBank": "OCB",
+    "logo": "https://api.vietqr.io/img/OCB.png"
+  },
+  {
+    "code": "334",
+    "name": "SCB Ngân hàng Sài Gòn (SCB)",
+    "nameTCB": "SAI GON (SCB)",
+    "nameVPBank": "SCB",
+    "logo": "https://api.vietqr.io/img/SCB.png"
+  },
+  {
+    "code": "341",
+    "name": "PGBANK Ngân hàng TMCP Thịnh vượng và Phát triển (PGBANK)",
+    "nameTCB": "XANG DAU PETROLIMEX (PGBANK)",
+    "nameVPBank": "PGBANK",
+    "logo": "https://api.vietqr.io/img/PGB.png"
+  },
+  {
+    "code": "348",
+    "name": "SHB Ngân hàng Sài Gòn Hà Nội (SHB)",
+    "nameTCB": "SAI GON - HA NOI (SHB)",
+    "nameVPBank": "SHB",
+    "logo": "https://api.vietqr.io/img/SHB.png"
+  },
+  {
+    "code": "352",
+    "name": "NCB Ngân hàng Quốc Dân (NCB)",
+    "nameTCB": "QUOC DAN (NCB)",
+    "nameVPBank": "NCB",
+    "logo": "https://api.vietqr.io/img/NCB.png"
+  },
+  {
+    "code": "353",
+    "name": "KIEN LONG BANK Ngân hàng Kiên Long (KIEN LONG BANK)",
+    "nameTCB": "KIEN LONG (KIENLONGBANK)",
+    "nameVPBank": "KIENLONGBANK",
+    "logo": "https://api.vietqr.io/img/KLB.png"
+  },
+  {
+    "code": "355",
+    "name": "VIET A BANK Ngân hàng Việt Á (VIET A BANK)",
+    "nameTCB": "VIET A (VIETABANK)",
+    "nameVPBank": "VAB"
+  },
+  {
+    "code": "356",
+    "name": "VIETBANK Ngân hàng Việt Nam Thương Tín (VIETBANK)",
+    "nameTCB": "VIET NAM THUONG TIN (VIETBANK)",
+    "nameVPBank": "VIET BANK",
+    "logo": "https://api.vietqr.io/img/VIETBANK.png"
+  },
+  {
+    "code": "357",
+    "name": "LPBank Ngân hàng Bưu điện Liên Việt (LPBank)",
+    "nameTCB": "BUU DIEN LIEN VIET (LPB)",
+    "nameVPBank": "LPBank",
+    "logo": "https://api.vietqr.io/img/LPB.png"
+  },
+  {
+    "code": "358",
+    "name": "TPBANK Ngân hàng Tiên Phong (TPBANK)",
+    "nameTCB": "TIEN PHONG (TPBANK)",
+    "nameVPBank": "TPB",
+    "logo": "https://api.vietqr.io/img/TPB.png"
+  },
+  {
+    "code": "359",
+    "name": "BVB Ngân hàng Bảo Việt (BVB)",
+    "nameTCB": "BAO VIET (BAOVIETBANK)",
+    "nameVPBank": "BVB",
+    "logo": "https://api.vietqr.io/img/BVB.png"
+  },
+  {
+    "code": "360",
+    "name": "PVCOMBANK Ngân hàng Đại chúng (PVCOMBANK)",
+    "nameTCB": "DAI CHUNG VN (PVCOMBANK)",
+    "nameVPBank": "PVCOMBANK",
+    "logo": "https://api.vietqr.io/img/PVB.png"
+  },
+  {
+    "code": "505",
+    "name": "VRB Ngân hàng Liên doanh Việt Nga (VRB)",
+    "nameTCB": "LD VIET NGA (VRB)",
+    "nameVPBank": "WRB",
+    "logo": "https://api.vietqr.io/img/PVCB.png"
+  },
+  {
+    "code": "TCB",
+    "name": "TECHCOMBANK Ngân hàng Kỹ thương Việt Nam (TECHCOMBANK)",
+    "nameTCB": "Ngân hàng TMCP Kỹ Thương Việt Nam",
+    "nameVPBank": "TCB",
+    "logo": "https://api.vietqr.io/img/TCB.png"
+  }
+]

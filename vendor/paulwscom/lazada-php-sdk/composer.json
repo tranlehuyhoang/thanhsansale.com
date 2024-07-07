@@ -1,0 +1,23 @@
+{
+    "name": "paulwscom/lazada-php-sdk",
+    "description": "A Lazada PHP SDK",
+    "keywords": [
+        "lazada",
+        "laravel"
+    ],
+    "homepage": "https://github.com/paulwscom/lazada-php-sdk",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paul Web Services",
+            "email": "paulwscom@gmail.com",
+            "homepage": "https://www.paulws.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Paulwscom\\Lazada\\": "src"
+        }
+    }
+}
