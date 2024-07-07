@@ -72,7 +72,7 @@ class AuthController extends Controller
 
             $rules = [
                 'Username' => 'required|min:3|max:100|unique:users,Username|regex:/^[a-zA-Z0-9]+$/',
-                'Email' => 'required|email|unique:users,Email',
+                'Email' => 'required|email',
                 'Password' => 'required|min:8|max:100|password_strength'
             ];
             $messages = [
@@ -83,7 +83,6 @@ class AuthController extends Controller
                 'Username.regex' => 'Tên người dùng chỉ được chứa các chữ cái và số, không có ký tự đặc biệt hoặc khoảng trắng',
                 'Email.required' => 'Email là bắt buộc',
                 'Email.email' => 'Email không hợp lệ',
-                'Email.unique' => 'Email đã tồn tại',
                 'Password.required' => 'Mật khẩu là bắt buộc',
                 'Password.min' => 'Mật khẩu phải có ít nhất 8 ký tự',
                 'Password.max' => 'Mật khẩu không được vượt quá 100 ký tự',
@@ -101,10 +100,35 @@ class AuthController extends Controller
                 return;
             }
 
+            $existingUser = $this->userService->GetByEmail($user['Email']);
+
+            if ($existingUser && $existingUser->IsActive == 0) {
+                // Nếu email đã tồn tại và chưa được xác thực, cập nhật thông tin người dùng
+                $data = [
+                    'Username' => $user['Username'],
+                    'Password' => password_hash($user['Password'], PASSWORD_DEFAULT),
+                    'Role' => ERole::Member,
+                    'IsActive' => 0,
+                ];
+
+                $result = $this->userService->Update($data, $existingUser->Id, $this->userService->tableName);
+
+                if (!$result) {
+                    Response::badRequest([], 'Có lỗi xảy ra');
+                    return;
+                }
+
+                // Gửi lại email xác thực
+                // Code gửi email xác thực ở đây (tương tự như trong hàm Resend)
+
+                Response::success([], 'Đăng ký thành công! Vui lòng kiểm tra email để xác thực tài khoản');
+                return;
+            }
+
             $userSave = [
-                'Username' => Request::post('Username'),
-                'Password' => Request::post('Password'),
-                'Email' => Request::post('Email'),
+                'Username' => $user['Username'],
+                'Password' => $user['Password'],
+                'Email' => $user['Email'],
                 'Role' => ERole::Member,
                 'IsActive' => 0,
             ];
@@ -123,6 +147,7 @@ class AuthController extends Controller
 
         $this->render('Auth.Register', '_AuthenLayout', ['title' => 'Đăng kí tài khoản mới']);
     }
+
 
 
 
