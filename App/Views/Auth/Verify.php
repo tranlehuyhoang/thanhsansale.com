@@ -175,4 +175,7 @@
             }
         }, 1000);
     }
+    document.addEventListener("DOMContentLoaded", function() {
+        resend();
+    });
 </script>

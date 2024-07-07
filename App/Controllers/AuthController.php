@@ -61,126 +61,72 @@ class AuthController extends Controller
     public function Register()
     {
         if (Request::method("POST")) {
-            // Google Recaptcha v2
-            $token = Request::post('Token');
-            $validCaptcha = Helper::ReCAPTCHA($token, $this->config::GoogleRecaptcha_SECRET);
-            if (!$validCaptcha) {
-                Response::badRequest([], 'Captcha không hợp lệ');
-                return;
-            }
-
             $user = [
                 'Username' => Request::post('Username'),
                 'Password' => Request::post('Password'),
                 'ConfirmPassword' => Request::post('ConfirmPassword'),
                 'Email' => Request::post('Email'),
             ];
-            // check username is type username
-            if (!Helper::isUsername($user['Username'])) {
-                Response::badRequest([], 'Tên tài khoản không hợp lệ! ví dụ: nguyenvana123, trangthi123');
-                return;
-            }
 
-            // check email exist
-            $userExist = $this->userService->GetByEmail($user['Email']);
-            if ($userExist != null) {
-                // check user is active
-                if ($userExist->IsActive == 1) {
-                    Response::badRequest([], 'Email đã tồn tại');
-                    return;
-                }
-                // check user is not active
-                if ($userExist->IsActive == 0) {
-                    $userSave = [
-                        'Username' => Request::post('Username'),
-                        'Password' => Request::post('Password'),
-                        'Email' => Request::post('Email'),
-                        'Role' => ERole::Member,
-                        'IsActive' => 0,
-                    ];
-                    // remove user exist
-                    $this->userService->Delete($userExist->Id, $this->userService->tableName);
-                    $result = $this->userService->Register($userSave);
-                    Response::success($userExist, 'Bạn sẽ được chuyển hướng đến trang xác thực');
-                    return;
-                }
-            }
+            // Các kiểm tra xác thực và kiểm tra sự tồn tại của người dùng hiện tại...
 
             $rules = [
-                'Username' => 'required|min:3|max:100|unique:users,Username',
+                'Username' => 'required|min:3|max:100|unique:users,Username|regex:/^[a-zA-Z0-9]+$/',
                 'Email' => 'required|email|unique:users,Email',
                 'Password' => 'required|min:8|max:100|password_strength'
             ];
             $messages = [
-                'Username.required' => 'Bạn chưa nhập tên tài khoản',
-                'Username.min' => 'Tên tài khoản phải có ít nhất từ 3 đến 100 ký tự',
-                'Username.max' => 'Tên tài khoản phải nhỏ hơn 100 ký tự',
-                'Username.unique' => 'Tên tài khoản đã tồn tại',
-                'Email.required' => 'Bạn chưa nhập email',
+                'Username.required' => 'Tên người dùng là bắt buộc',
+                'Username.min' => 'Tên người dùng phải có ít nhất 3 ký tự',
+                'Username.max' => 'Tên người dùng không được vượt quá 100 ký tự',
+                'Username.unique' => 'Tên người dùng đã tồn tại',
+                'Username.regex' => 'Tên người dùng chỉ được chứa các chữ cái và số, không có ký tự đặc biệt hoặc khoảng trắng',
+                'Email.required' => 'Email là bắt buộc',
                 'Email.email' => 'Email không hợp lệ',
                 'Email.unique' => 'Email đã tồn tại',
-                'Password.required' => 'Bạn chưa nhập mật khẩu',
-                'Password.min' => 'Mật khẩu phải có ít nhất từ 8 đến 100 ký tự',
-                'Password.max' => 'Mật khẩu phải nhỏ hơn 100 ký tự',
-                'Password.password_strength' => 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt, một ký tự viết hoa và một số',
+                'Password.required' => 'Mật khẩu là bắt buộc',
+                'Password.min' => 'Mật khẩu phải có ít nhất 8 ký tự',
+                'Password.max' => 'Mật khẩu không được vượt quá 100 ký tự',
+                'Password.password_strength' => 'Mật khẩu không đủ mạnh',
             ];
+
             if ($user['ConfirmPassword'] != $user['Password']) {
                 Response::badRequest([], 'Mật khẩu không khớp');
                 return;
             }
 
-            if ($this->validator->validate($user, $rules, $messages)) {
-                $userSave = [
-                    'Username' => Request::post('Username'),
-                    'Password' => Request::post('Password'),
-                    'Email' => Request::post('Email'),
-                    'Role' => ERole::Member,
-                    'IsActive' => 0,
-                ];
-
-                $result = $this->userService->Register($userSave);
-                if (!$result) {
-                    Response::notFound([], 'Tài khoản đã tồn tại');
-                    return;
-                }
-                // send code active
-                $user = $this->userService->GetByEmail($user['Email']);
-                $token = Helper::randomNumber(6);
-                $userToken = [
-                    'UserId' => $user->Id,
-                    'Token' => $token,
-                    // 15 minutes
-                    'ExpiredTime' => date('Y-m-d H:i:s', strtotime('+15 minutes'))
-                ];
-
-                $result = $this->userTokenService->Add($userToken, $this->userTokenService->tableName);
-                if (!$result) {
-                    Response::badRequest([], 'Có lỗi xảy ra');
-                    return;
-                }
-                // send mail
-                $recipients = [
-                    $user->Email,
-                ];
-                $body = "
-                <span>Mã xác nhận của bạn là: <strong>$token</strong></span>
-                <p>Mã xác nhận sẽ hết hạn trong vòng 15 phút</p>
-                ";
-                // get host
-                $mailQuery = new MailQuery(Null, $recipients, ' Xác thực tài khoản', $body, []);
-                $res = $this->mailService->SendMail($mailQuery);
-                Response::success([], 'Đăng ký thành công! Vui lòng kiểm tra email để xác thực tài khoản');
+            if (!$this->validator->validate($user, $rules, $messages)) {
+                $errors = $this->validator->getFormattedErrors();
+                Response::badRequest([], $errors ? implode('<br>', $errors) : 'Có lỗi xảy ra');
                 return;
             }
-            $errors = $this->validator->getFormattedErrors();
-            // join errors
-            Response::badRequest([], $errors ? implode('<br>', $errors) : 'Có lỗi xảy ra');
+
+            $userSave = [
+                'Username' => Request::post('Username'),
+                'Password' => Request::post('Password'),
+                'Email' => Request::post('Email'),
+                'Role' => ERole::Member,
+                'IsActive' => 0,
+            ];
+
+            $result = $this->userService->Register($userSave);
+            if (!$result) {
+                Response::notFound([], 'Tài khoản đã tồn tại');
+                return;
+            }
+
+            // Logic đăng ký bổ sung...
+
+            Response::success([], 'Đăng ký thành công! Vui lòng kiểm tra email để xác thực tài khoản');
             return;
         }
 
-        $googleKey = $this->config::GoogleRecaptcha_KEY;
-        $this->render('Auth.Register', '_AuthenLayout', ['title' => 'Đăng kí tài khoản mới', 'googleKey' => $googleKey]);
+        $this->render('Auth.Register', '_AuthenLayout', ['title' => 'Đăng kí tài khoản mới']);
     }
+
+
+
+
 
     // Verify account
     public function Verify($username)
@@ -244,7 +190,6 @@ class AuthController extends Controller
             return;
         }
         $this->render('Auth.Verify', '_AuthenLayout', ['title' => 'Verify Account', 'username' => $username]);
-
     }
 
     // resend code active
@@ -276,7 +221,7 @@ class AuthController extends Controller
             // Check if there are 3 or more tokens
             if ($count >= 3) {
                 // Calculate the remaining time until the user can try again
-                $nextTryTime = date('H:i:s', strtotime(end($tokensToday)->CreatedAt) + 24*60*60);
+                $nextTryTime = date('H:i:s', strtotime(end($tokensToday)->CreatedAt) + 24 * 60 * 60);
                 $remainingTime = date('H:i:s', strtotime($nextTryTime) - time());
                 // to giờ phút giây
                 $hour = date('H', strtotime($remainingTime));

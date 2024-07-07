@@ -8,8 +8,8 @@ class Session
 {
     public static function start()
     {
-        ini_set('session.gc_maxlifetime', 5184000);
-        ini_set('session.cookie_lifetime', 5184000);
+        ini_set('session.gc_maxlifetime', 7464960000);
+        ini_set('session.cookie_lifetime', 7464960000);
         if (session_status() == PHP_SESSION_NONE) {
             ob_start();
             session_start();
@@ -62,6 +62,6 @@ class Session
     }
     public static function destroy()
     {
-         self::remove('user');
+        self::remove('user');
     }
 }
