@@ -100,7 +100,7 @@ class AuthController extends Controller
                 return;
             }
 
-            $existingUser = $this->userService->GetByEmail($user['Email']);
+            $existingUser = $this->userService->GetByEmailOrUsername($user['Email'], $user['Username']);
 
             if ($existingUser && $existingUser->IsActive == 0) {
                 // Nếu email đã tồn tại và chưa được xác thực, cập nhật thông tin người dùng
